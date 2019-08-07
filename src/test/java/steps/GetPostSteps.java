@@ -39,4 +39,13 @@ public class GetPostSteps {
     }
 
 
+    @Given("^I perform GET operation$")
+    public void iPerformGETOperation() {
+        BDDStyleMethod.performPathParameter("1");
+    }
+
+    @Then("^I should see verify GET Parameter$")
+    public void iShouldSeeVerifyGETParameter() {
+        BDDStyleMethod.performQueryParameter( "doggie","Charlie");
+    }
 }
