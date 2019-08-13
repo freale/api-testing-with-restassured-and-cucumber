@@ -3,20 +3,26 @@ package steps;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import io.restassured.response.Response;
+import io.restassured.response.ResponseOptions;
+import utilities.RestAssuredExtension;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 public class GetPostSteps {
 
+    private static ResponseOptions<Response> response;
+
     @Given("^I perform GET operation \"([^\"]*)\"$")
-    public void iPerformGETOperation(String arg0) throws Throwable {
+    public void iPerformGETOperation(String url) throws Throwable {
+        response = RestAssuredExtension.getOps(url);
     }
 
-    @And("^I perform GET for the post number \"([^\"]*)\"$")
-    public void iPerformGETForThePostNumber(String petID) throws Throwable {
-        BDDStyleMethod.simpleGETPost(petID);
-    }
 
     @Then("^I should see the author name as \"([^\"]*)\"$")
-    public void iShouldSeeTheAuthorNameAs(String arg0) throws Throwable {
+    public void iShouldSeeTheAuthorNameAs(String authorName) throws Throwable {
+        assertThat(response.getBody().jsonPath().get("name"), is(authorName));
     }
 
 
