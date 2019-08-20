@@ -54,4 +54,9 @@ public class GetPostSteps {
     public void iShouldSeeVerifyGETParameter() {
         BDDStyleMethod.performQueryParameter( "doggie","Charlie");
     }
+
+    @Given("^I perform a POST operation for the store$")
+    public void iPerformAPOSTOperationForTheStore() {
+        BDDStyleMethod.performPOSTWithBodyParameter();
+    }
 }

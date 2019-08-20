@@ -1,9 +1,13 @@
 package steps;
 
 import io.restassured.http.ContentType;
+import org.hamcrest.core.Is;
+
+import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.is;
 
 public class BDDStyleMethod {
 
@@ -49,7 +53,21 @@ public class BDDStyleMethod {
                 .statusCode(200);
     }
 
+    public static void performPOSTWithBodyParameter(){
+        HashMap<String,String> postContent = new HashMap<>();
+        postContent.put("name", "FedeDog3");
+        postContent.put("status", "available");
 
+        given()
+                .contentType(ContentType.JSON)
+                .with()
+                    .body(postContent)
+                .when()
+                    .post("https://petstore.swagger.io/v2/pet")
+                .then()
+                    .body("name", Is.is("FedeDog3"))
+                    .statusCode(200);
+    }
 
 
 }

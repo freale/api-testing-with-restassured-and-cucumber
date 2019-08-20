@@ -13,3 +13,6 @@ Feature:
   Scenario: Verify Parameters of GET
     Given I perform GET operation
     Then I should see verify GET Parameter
+
+  Scenario: Verify POST operation
+    Given I perform a POST operation for the store
